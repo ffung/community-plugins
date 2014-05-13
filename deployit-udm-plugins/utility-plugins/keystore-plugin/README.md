@@ -17,7 +17,7 @@ The Keystore plugin is a Deployit plugin and allows to package certifcates and k
 * **Deployit requirements**
 * **Deployit**: version 3.6+
 
-All certificates/keys are required to be base64 encoded. Suppored formats: certificate X.509 DER, private key PKCS#8, certificate chain PKCS#7
+All certificates/keys are required to be base64 encoded. Supported formats: certificate X.509 DER, private key PKCS#8, certificate chain PKCS#7
 
 # Usage #
 
