@@ -6,7 +6,7 @@ See the **Deployit Reference Manual** for background information on Deployit and
 
 # Overview #
 
-The Keystore plugin is a Deployit plugin and allows to package certifcates and keys and deploy them to a keystore.KeyStore.
+The Keystore plugin is a Deployit plugin and allows to package certificates and keys and deploy them to a keystore.KeyStore.
 
 ##Features##
 * Install a certificate;
