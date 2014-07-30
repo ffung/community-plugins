@@ -13,7 +13,7 @@
     <deployit.engine.version>4.0.0</deployit.engine.version>
     <deployit.servercli.version>4.0.0</deployit.servercli.version>
     <deployit.bundledplugin.version>4.0.0</deployit.bundledplugin.version>
-    <deployit.wls.version>3.9.1</deployit.wls.version>
+    <deployit.wls.version>4.0.0</deployit.wls.version>
     <overthere.version>2.4.2</overthere.version>
     <scannit.version>1.2.1</scannit.version>
     <github.global.server>github</github.global.server>
