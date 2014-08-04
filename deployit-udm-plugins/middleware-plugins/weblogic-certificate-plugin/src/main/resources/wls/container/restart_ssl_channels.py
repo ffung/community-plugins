@@ -31,5 +31,3 @@ if exists('/ServerRuntimes/' + target.name):
     print 'Restarted SSL Channels for ' + target.name
 else:
     print 'Restarting SSL Channels for ' + target.name + ' is not necessary, target is down'
-
-sys.exit(0)
