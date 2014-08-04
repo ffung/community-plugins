@@ -1,26 +1,26 @@
-# Apache Weblogic plugin #
+#  Weblogic Certificate plugin #
 
 This document describes the functionality provided by the Weblogic Certificate plugin.
 
-See the **Deployit Reference Manual** for background information on Deployit and deployment concepts.
+See the **XL Deploy Reference Manual** for background information on XL Deploy and deployment concepts.
 
 # Overview #
 
 
-The Weblogic Certificate plugin is a Deployit plugin used to deploy certificates and keys and deploy them to a CustomIdentityKeyStore or CustomTrustKeyStore.
+The Weblogic Certificate plugin is a XL Deploy plugin used to deploy certificates and keys to a CustomIdentityKeyStore or CustomTrustKeyStore. See [_Configuring keystores_](http://docs.oracle.com/cd/E24329_01/apirefs.1211/e24401/taskhelp/security/ConfigureKeystoresAndSSL.html) for details.
 
 ##Features##
 
 * Install a certificate;
 * Modify a certificate / key
 * Remove a certificate / key
-* Restart SSL step on affected managed servers
+* Adds restart SSL step on affected managed servers
 
 # Requirements #
 
-* **Deployit requirements**
-	* **Deployit**: version 4.0.+
-	* **Other Deployit Plugins**: wls-plugin-4.0.x
+* **XL Deploy requirements**
+	* **XL Deploy**: version 4.0.+
+	* **Other XL Deploy Plugins**: wls-plugin-4.0.x
 
 # Installation
 
