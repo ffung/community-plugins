@@ -11,6 +11,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
+import com.google.common.primitives.Ints;
 import com.xebialabs.deployit.plugin.api.deployment.planning.Contributor;
 import com.xebialabs.deployit.plugin.api.deployment.planning.DeploymentPlanningContext;
 import com.xebialabs.deployit.plugin.api.deployment.specification.Delta;
@@ -34,7 +35,9 @@ public class CustomKeyStoreRestartSSLContributor {
 				gatherTargets(deltas.getDeltas()),
 				new Function<Server, Step>() {
 					public Step apply(Server server) {
-						return new PythonDeploymentStep(90, server.getManagingContainer(),
+						return new PythonDeploymentStep(
+							  Ints.tryParse((String)server.getProperty("restartSslChannelsOrder")),
+							  server.getManagingContainer(),
 							  (String)server.getProperty("restartSslChannelsScript"),
 								new ImmutableMap.Builder<String, Object>().put("target", server).put("type", server.getType().getName()).build(),
 								"Restart SSL channels on " + server);

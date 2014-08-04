@@ -11,6 +11,7 @@
 
    <type-modification type="wls.Server">
          <property name="restartSslChannelsScript" default="wls/container/restart_ssl_channels.py" hidden="true"/>
+         <property name="restartSslChannelsOrder" default="90" hidden="true"/>
    </type-modification>
 
   <type type="wls.CustomIdentityKeyStore" extends="wls.CustomKeyStore" description="A custom Identity Keystore."/>
