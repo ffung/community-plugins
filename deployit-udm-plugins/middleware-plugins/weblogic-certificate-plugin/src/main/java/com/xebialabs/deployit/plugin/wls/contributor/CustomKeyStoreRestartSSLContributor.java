@@ -42,11 +42,11 @@ public class CustomKeyStoreRestartSSLContributor {
 		logger.trace("CustomKeyStoreRestartSSLContributor.gatherTargets");
 		Type certificateType = DescriptorRegistry.getDescriptor(
 				"wls.Certificate").getType();
-		Iterable<Delta> filter = Iterables.filter(operations, Predicates.and(
+		Iterable<Delta> certificatesNoNoops = Iterables.filter(operations, Predicates.and(
 				Predicates.not(Predicates2.operationIs(Operation.NOOP)),
 				Predicates2.deltaOf(certificateType)));
 
-		Iterable<Server> transform = Iterables.transform(filter,
+		Iterable<Server> targetedWlsServers = Iterables.transform(certificatesNoNoops,
 				new Function<Delta, Server>() {
 					public Server apply(Delta delta) {
 						return ((CustomKeyStore) Predicates2.extractDeployed()
@@ -54,7 +54,7 @@ public class CustomKeyStoreRestartSSLContributor {
 					}
 				});
 
-		Set<Server> servers = Sets.newHashSet(transform);
+		Set<Server> servers = Sets.newHashSet(targetedWlsServers);
 	    logger.debug("servers {}", servers);
 	    return servers;
 	}
