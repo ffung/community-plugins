@@ -9,6 +9,10 @@
          <property name="passphrase" label="Keystore's passphrase" password="true"/>
    </type-modification>
 
+   <type-modification type="wls.Server">
+         <property name="restartSslChannelsScript" default="wls/container/restart_ssl_channels.py" hidden="true"/>
+   </type-modification>
+
   <type type="wls.CustomIdentityKeyStore" extends="wls.CustomKeyStore" description="A custom Identity Keystore."/>
 
   <type type="wls.CustomTrustKeyStore" extends="wls.CustomKeyStore" description="A custom Trust Keystore."/>

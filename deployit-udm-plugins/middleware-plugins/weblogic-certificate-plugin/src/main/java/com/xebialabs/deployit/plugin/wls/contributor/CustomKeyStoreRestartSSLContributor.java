@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.xebialabs.deployit.plugin.api.deployment.planning.Contributor;
@@ -18,9 +19,9 @@ import com.xebialabs.deployit.plugin.api.deployment.specification.Operation;
 import com.xebialabs.deployit.plugin.api.flow.Step;
 import com.xebialabs.deployit.plugin.api.reflect.DescriptorRegistry;
 import com.xebialabs.deployit.plugin.api.reflect.Type;
+import com.xebialabs.deployit.plugin.python.PythonDeploymentStep;
 import com.xebialabs.deployit.plugin.wls.container.CustomKeyStore;
 import com.xebialabs.deployit.plugin.wls.container.Server;
-import com.xebialabs.deployit.plugin.wls.step.RestartSSLChannelsStep;
 
 public class CustomKeyStoreRestartSSLContributor {
 	protected static final Logger logger = LoggerFactory.getLogger(CustomKeyStoreRestartSSLContributor.class);
@@ -33,7 +34,10 @@ public class CustomKeyStoreRestartSSLContributor {
 				gatherTargets(deltas.getDeltas()),
 				new Function<Server, Step>() {
 					public Step apply(Server server) {
-						return new RestartSSLChannelsStep(90, server);
+						return new PythonDeploymentStep(90, server.getManagingContainer(),
+							  (String)server.getProperty("restartSslChannelsScript"),
+								new ImmutableMap.Builder<String, Object>().put("target", server).put("type", server.getType().getName()).build(),
+								"Restart SSL channels on " + server);
 					}
 				}));
 	}
