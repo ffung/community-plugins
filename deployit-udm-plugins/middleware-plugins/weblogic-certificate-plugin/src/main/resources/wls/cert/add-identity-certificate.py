@@ -14,20 +14,29 @@ print 'Install certificate %s to target %s' % (deployed.name, deployed.container
 # Load the keystore
 print 'Loading keystore %s' % (deployed.container.keystore)
 ks = KeyStore.getInstance(deployed.container.keystoreType)
-ks.load(FileInputStream(deployed.container.keystore), deployed.container.passphrase)
+ksfi = FileInputStream(deployed.container.keystore)
 
- # Load certificates (base64 encoded DER/PEM-encoded certificates)
- # http://docs.oracle.com/javase/7/docs/api/java/security/cert/CertificateFactory.html#generateCertificates(java.io.InputStream)
-print 'Loading the certificate(chain)'
-inStream = ByteArrayInputStream(DatatypeConverter.parseBase64Binary(String(deployed.certificate)))
-cf = CertificateFactory.getInstance("X.509")
-chain = cf.generateCertificates(inStream).toArray(jarray.zeros(0, java.security.cert.Certificate))
+try:
+    ks.load(ksfi, deployed.container.passphrase)
 
-# Save the private key entry (base64 PKCS8 DER encoded)
-print 'Storing key/certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
-kf = KeyFactory.getInstance(deployed.keyAlgorithm)
-key = kf.generatePrivate(PKCS8EncodedKeySpec(DatatypeConverter.parseBase64Binary(String(deployed.key))))
-ks.setEntry(deployed.alias, KeyStore.PrivateKeyEntry(key, chain), KeyStore.PasswordProtection(deployed.keyPassword))
-ks.store(FileOutputStream(deployed.container.keystore), deployed.container.passphrase)
+     # Load certificates (base64 encoded DER/PEM-encoded certificates)
+     # http://docs.oracle.com/javase/7/docs/api/java/security/cert/CertificateFactory.html#generateCertificates(java.io.InputStream)
+    print 'Loading the certificate(chain)'
+    inStream = ByteArrayInputStream(DatatypeConverter.parseBase64Binary(String(deployed.certificate)))
+    cf = CertificateFactory.getInstance("X.509")
+    chain = cf.generateCertificates(inStream).toArray(jarray.zeros(0, java.security.cert.Certificate))
 
-print 'Stored key/certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
+    # Save the private key entry (base64 PKCS8 DER encoded)
+    print 'Storing key/certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
+    kf = KeyFactory.getInstance(deployed.keyAlgorithm)
+    key = kf.generatePrivate(PKCS8EncodedKeySpec(DatatypeConverter.parseBase64Binary(String(deployed.key))))
+    ks.setEntry(deployed.alias, KeyStore.PrivateKeyEntry(key, chain), KeyStore.PasswordProtection(deployed.keyPassword))
+
+    ksfo = FileOutputStream(deployed.container.keystore)
+    try:
+        ks.store(ksfo, deployed.container.passphrase)
+        print 'Stored key/certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
+    finally:
+        ksfo.close()
+finally:
+    ksfi.close()

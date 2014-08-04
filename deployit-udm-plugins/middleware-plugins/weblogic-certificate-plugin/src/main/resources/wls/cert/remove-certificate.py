@@ -10,13 +10,20 @@ print 'Destroy certificate %s from target %s' % (deployed.name, deployed.contain
 # Load the keystore
 print 'Loading keystore %s' % (deployed.container.keystore)
 ks = KeyStore.getInstance(deployed.container.keystoreType)
-ks.load(FileInputStream(deployed.container.keystore), deployed.container.passphrase)
+ksfi = FileInputStream(deployed.container.keystore)
+try:
+    ks.load(ksfi, deployed.container.passphrase)
 
-if ks.containsAlias(deployed.alias):
-    print 'Deleting certificate in the keystore under alias %s' % (deployed.alias)
-    ks.deleteEntry(deployed.alias)
-    ks.store(FileOutputStream(deployed.container.keystore), deployed.container.passphrase)
-    
-    print 'Deleted certificate %s (alias=%s) from keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
-else:
-    print 'Certificate not found in keystore, nothing to do'
+    if ks.containsAlias(deployed.alias):
+        print 'Deleting certificate in the keystore under alias %s' % (deployed.alias)
+        ks.deleteEntry(deployed.alias)
+        ksfo = FileOutputStream(deployed.container.keystore)
+        try:
+            ks.store(ksfo, deployed.container.passphrase)
+            print 'Deleted certificate %s (alias=%s) from keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
+        finally:
+            ksfo.close()
+    else:
+        print 'Certificate not found in keystore, nothing to do'
+finally:
+    ksfi.close()

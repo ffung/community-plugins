@@ -12,19 +12,28 @@ if deployed.certificate:
     # Load the keystore
     print 'Loading keystore %s' % (deployed.container.keystore)
     ks = KeyStore.getInstance(deployed.container.keystoreType)
-    ks.load(FileInputStream(deployed.container.keystore), deployed.container.passphrase)
-    
-    # Load certificate(base64 encoded DER/PEM-encoded certificate)
-    print 'Loading the certificate'
-    inStream = ByteArrayInputStream(DatatypeConverter.parseBase64Binary(String(deployed.certificate)))
-    cf = CertificateFactory.getInstance("X.509")
-    cert = cf.generateCertificate(inStream)
-    
-    # Save the certificate
-    print 'Storing certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
-    ks.setCertificateEntry(deployed.alias, cert)
-    ks.store(FileOutputStream(deployed.container.keystore), deployed.container.passphrase)
-    
-    print 'Stored certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
+
+    ksfi = FileInputStream(deployed.container.keystore)
+    try:
+        ks.load(ksfi, deployed.container.passphrase)
+
+        # Load certificate(base64 encoded DER/PEM-encoded certificate)
+        print 'Loading the certificate'
+        inStream = ByteArrayInputStream(DatatypeConverter.parseBase64Binary(String(deployed.certificate)))
+        cf = CertificateFactory.getInstance("X.509")
+        cert = cf.generateCertificate(inStream)
+
+        # Save the certificate
+        print 'Storing certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
+        ks.setCertificateEntry(deployed.alias, cert)
+
+        ksfo = FileOutputStream(deployed.container.keystore)
+        try:
+            ks.store(ksfo, deployed.container.passphrase)
+            print 'Stored certificate %s (alias=%s) in keystore %s' % (deployed.name, deployed.alias, deployed.container.keystore)
+        finally:
+            ksfo.close()
+    finally:
+        ksfi.close()
 else:
     print 'Empty certificate, nothing to do'
