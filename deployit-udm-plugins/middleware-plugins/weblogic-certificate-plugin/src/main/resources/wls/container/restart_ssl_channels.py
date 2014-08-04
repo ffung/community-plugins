@@ -6,8 +6,10 @@ if 'ensureStableContainerState' not in dir():
     def ensureStableContainerState(target, type):
         print "Going to check state of: ", type, " ", target.name
     
-        if type == "Server": servers =[target.name]
-        else: servers = target.servers
+        if type == "Server": 
+            servers = [target.name]
+        else: 
+            servers = target.servers
     
         for name in servers:
             for a in range(1, 5):
