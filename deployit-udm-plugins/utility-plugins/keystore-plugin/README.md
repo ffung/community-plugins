@@ -6,7 +6,7 @@ See the **Deployit Reference Manual** for background information on Deployit and
 
 # Overview #
 
-The Keystore plugin is a Deployit plugin and allows to package certificates and keys and deploy them to a keystore.KeyStore.
+The Keystore plugin is a Deployit plugin and allows to package certifcates and keys and deploy them to a keystore.KeyStore.
 
 ##Features##
 * Install a certificate;
@@ -17,11 +17,11 @@ The Keystore plugin is a Deployit plugin and allows to package certificates and 
 * **Deployit requirements**
 * **Deployit**: version 3.6+
 
-All certificates/keys are required to be base64 encoded. Supported formats: certificate X.509 DER, private key PKCS#8, certificate chain PKCS#7
+All certificates/keys are required to be base64 encoded. Suppored formats: certificate X.509 DER, private key PKCS#8, certificate chain PKCS#7
 
 # Usage #
 
-The plugin works with the standard deployment package of DAR format. Please see the [_Packaging Manual_](http://docs.xebialabs.com/releases/4.0/deployit/packagingmanual.html) for more details about the DAR format and the ways to 
+The plugin works with the standard deployment package of DAR format. Please see the [_Packaging Manual_](http://docs.xebialabs.com/releases/4.0/deployit/packagingmanual.html) for more details about the DAR format and the ways to
 compose one. 
 
 The following is a sample deployment-manifest.xml file that can be used to install a certificate.
