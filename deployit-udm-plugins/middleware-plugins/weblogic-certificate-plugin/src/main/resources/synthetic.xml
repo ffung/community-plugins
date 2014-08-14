@@ -3,7 +3,7 @@
            xmlns="http://www.xebialabs.com/deployit/synthetic"
            xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd">
 
-   <type-modification type="wls.CustomKeyStore">
+   <type-modification type="wlsx.CustomKeyStore">
          <property name="keystore" label="Path and filename of the keystore" required="true" />
          <property name="keystoreType" label="Type of the keystore" required="true" default="JKS" />
          <property name="passphrase" label="Keystore's passphrase" password="true"/>
@@ -14,13 +14,13 @@
          <property name="restartSslChannelsOrder" default="90" hidden="true"/>
    </type-modification>
 
-  <type type="wls.CustomIdentityKeyStore" extends="wls.CustomKeyStore" description="A custom Identity Keystore."/>
+  <type type="wlsx.CustomIdentityKeyStore" extends="wlsx.CustomKeyStore" description="A custom Identity Keystore."/>
 
-  <type type="wls.CustomTrustKeyStore" extends="wls.CustomKeyStore" description="A custom Trust Keystore."/>
+  <type type="wlsx.CustomTrustKeyStore" extends="wlsx.CustomKeyStore" description="A custom Trust Keystore."/>
 
-  <type type="wls.Certificate" extends="wls.Resource" deployable-type="wls.CertificateSpec"
-          description="Certificate installed on a WLS Keystore" virtual="true" container-type="wls.CustomKeyStore">
-        <generate-deployable type="wls.CertificateSpec" extends="wls.ResourceSpec"/>
+  <type type="wlsx.Certificate" extends="wls.Resource" deployable-type="wlsx.CertificateSpec"
+          description="Certificate installed on a WLS Keystore" virtual="true" container-type="wlsx.CustomKeyStore">
+        <generate-deployable type="wlsx.CertificateSpec" extends="wls.ResourceSpec"/>
         <property name="alias" description="The alias of the certificate in the Keystore" required="true"/>
         <property name="certificate" label="Certificate (base64 encoded)" description="The certificate (base64 encoded)" size="large" required="false"/>
         <property name="createVerb" default="Add" hidden="true"/>
@@ -28,9 +28,9 @@
         <property name="destroyVerb" default="Remove" hidden="true"/>
   </type>
 
-  <type type="wls.IdentityCertificate" extends="wls.Certificate" deployable-type="wls.IdentityCertificateSpec"
-          description="Certificate installed on the WLS Identity Keystore" container-type="wls.CustomIdentityKeyStore">
-        <generate-deployable type="wls.IdentityCertificateSpec" extends="wls.CertificateSpec"/>
+  <type type="wlsx.IdentityCertificate" extends="wlsx.Certificate" deployable-type="wlsx.IdentityCertificateSpec"
+          description="Certificate installed on the WLS Identity Keystore" container-type="wlsx.CustomIdentityKeyStore">
+        <generate-deployable type="wlsx.IdentityCertificateSpec" extends="wlsx.CertificateSpec"/>
         <property name="certificate" label="Certificate (base64 encoded)" description="The certificate (base64 encoded)" size="large" required="true"/>
         <property name="createScript" default="wls/cert/add-identity-certificate.py" hidden="true"/>
         <property name="key" label="Key (base64 encoded PKCS#8)" description="The key associated with the certificate (base64 encoded form of a PKCS#8 DER key)" password="true" size="large" required="true"/>
@@ -38,9 +38,9 @@
         <property name="keyPassword" description="Password of the private key" password="true" required="true"/>
   </type>
 
-  <type type="wls.TrustCertificate" extends="wls.Certificate" deployable-type="wls.TrustCertificateSpec"
-          description="Certificate installed on the WLS Trust Keystore" container-type="wls.CustomTrustKeyStore">
-        <generate-deployable type="wls.TrustCertificateSpec" extends="wls.CertificateSpec" />
+  <type type="wlsx.TrustCertificate" extends="wlsx.Certificate" deployable-type="wlsx.TrustCertificateSpec"
+          description="Certificate installed on the WLS Trust Keystore" container-type="wlsx.CustomTrustKeyStore">
+        <generate-deployable type="wlsx.TrustCertificateSpec" extends="wlsx.CertificateSpec" />
         <property name="createScript" default="wls/cert/add-trust-certificate.py" hidden="true"/>
   </type>
 </synthetic>
