@@ -1,4 +1,4 @@
-package com.xebialabs.deployit.plugin.wls.contributor;
+package ext.deployit.community.plugin.wls.contributor;
 
 import java.util.List;
 import java.util.Set;
@@ -21,8 +21,9 @@ import com.xebialabs.deployit.plugin.api.flow.Step;
 import com.xebialabs.deployit.plugin.api.reflect.DescriptorRegistry;
 import com.xebialabs.deployit.plugin.api.reflect.Type;
 import com.xebialabs.deployit.plugin.python.PythonDeploymentStep;
-import com.xebialabs.deployit.plugin.wls.container.CustomKeyStore;
 import com.xebialabs.deployit.plugin.wls.container.Server;
+import com.xebialabs.deployit.plugin.wls.contributor.Predicates2;
+import ext.deployit.community.plugin.wls.container.CustomKeyStore;
 
 public class CustomKeyStoreRestartSSLContributor {
 	protected static final Logger logger = LoggerFactory.getLogger(CustomKeyStoreRestartSSLContributor.class);

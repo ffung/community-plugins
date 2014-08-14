@@ -1,4 +1,4 @@
-package com.xebialabs.deployit.plugin.wls.container;
+package ext.deployit.community.plugin.wls.container;
 
 import java.util.Map;
 import java.util.Set;
