@@ -1,4 +1,4 @@
-package com.xebialabs.deployit.plugin.wls.container;
+package ext.deployit.community.plugin.wls.container;
 
 import com.xebialabs.deployit.plugin.api.inspection.Inspect;
 import com.xebialabs.deployit.plugin.api.inspection.InspectionContext;
@@ -9,6 +9,7 @@ import com.xebialabs.deployit.plugin.overthere.Host;
 import com.xebialabs.deployit.plugin.overthere.HostContainer;
 import com.xebialabs.deployit.plugin.python.PythonManagedContainer;
 import com.xebialabs.deployit.plugin.python.PythonManagingContainer;
+import com.xebialabs.deployit.plugin.wls.container.Server;
 
 @Metadata(description = "Keystores ensure the secure storage and management of private keys and trusted certificate authorities (CAs).", virtual = true)
 public class CustomKeyStore extends BaseContainer implements
