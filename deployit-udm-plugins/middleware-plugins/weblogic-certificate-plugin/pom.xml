@@ -11,7 +11,7 @@
   <artifactId>weblogic-certificate-plugin</artifactId>
   <version>${deployit.api.version}-1-SNAPSHOT</version>
   <properties>
-    <maven.test.skip>true</maven.test.skip>
+    <maven.test.skip>false</maven.test.skip>
   </properties>
   <scm>
     <connection>scm:git:git://github.com/xebialabs/community-plugins.git</connection>
@@ -35,7 +35,7 @@
       <artifactId>overthere</artifactId>
     </dependency>
   </dependencies>
-  
+
   <profiles>
     <profile>
       <id>test-with-wls-plugin</id>
@@ -50,22 +50,9 @@
       </properties>
       <dependencies>
         <dependency>
-          <groupId>com.xebialabs.deployit.plugins</groupId>
-          <artifactId>wls-plugin</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>com.xebialabs.deployit.plugins</groupId>
-          <artifactId>python-plugin</artifactId>
-        </dependency>
-        <dependency>
           <groupId>com.xebialabs.deployit</groupId>
           <artifactId>udm-test-support</artifactId>
           <version>${deployit.api.version}</version>
-          <scope>test</scope>
-        </dependency>
-        <dependency>
-          <groupId>com.xebialabs.overthere</groupId>
-          <artifactId>overthere</artifactId>
           <scope>test</scope>
         </dependency>
         <dependency>
