@@ -35,17 +35,17 @@ The following is a sample deployment-manifest.xml file that can be used to insta
 <udm.DeploymentPackage version="1.0" application="CertificateApp">
   <orchestrator />
   <deployables>
-    <wls.TrustCertificateSpec name="some-ca">
+    <wlsx.TrustCertificateSpec name="some-ca">
       <tags />
       <alias>some-ca</alias>
       <certificate>MIIF....</certificate>
-    </wls.TrustCertificateSpec>
-    <wls.IdentityCertificateSpec name="some-identity">
+    </wlsx.TrustCertificateSpec>
+    <wlsx.IdentityCertificateSpec name="some-identity">
       <tags />
       <alias>some-identity</alias>
       <certificate>MIIF....</certificate>
       <key>MIIE...</key>
-    </wls.IdentityCertificateSpec>
+    </wlsx.IdentityCertificateSpec>
   </deployables>
 </udm.DeploymentPackage>
 ```
